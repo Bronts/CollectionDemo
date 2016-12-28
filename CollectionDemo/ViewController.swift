@@ -10,8 +10,8 @@ import UIKit
 
 let reuseIdentifier = "CollectionCell"
 
-let cars = ["丰田", "雷克萨斯", "本田", "奥迪", "奔驰", "宝马", "英菲尼迪"]
-let colors = [UIColor.purpleColor(), UIColor.redColor(), UIColor.blueColor(), UIColor.orangeColor()]
+let cars = ["丰田", "雷克萨斯", "本田", "奥迪", "奔驰", "宝马", "英菲尼迪", "丰田", "雷克萨斯", "本田", "奥迪", "奔驰", "宝马", "英菲尼迪"]
+let colors = [UIColor.purple, UIColor.red, UIColor.blue, UIColor.orange]
 
 class ViewController: UIViewController {
     // 定义SB中的collectionView
@@ -42,21 +42,21 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
     *                Date          Author             Operation
     *             2015-07-07     Yangzheng         Create Function
     ********************************************************************************/
-    func initCollectionView(collectionView: UICollectionView) {
-        let screenWidth = UIScreen.mainScreen().bounds.size.width
+    func initCollectionView(_ collectionView: UICollectionView) {
+        let screenWidth = UIScreen.main.bounds.size.width
         self.collectionView.frame.size.width = screenWidth
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cars.count
     }
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CollectionCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionCell
         
         //var thisCell = cell as! CollectionCell
-        cell.CellButton.setTitle(cars[indexPath.item], forState: UIControlState.Normal)//
+        cell.CellButton.setTitle(cars[indexPath.item], for: UIControlState())//
         
         print(cell.frame.width)
         //println(self.collectionView.frame.width)
@@ -67,11 +67,11 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
     }
     
 
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var itemSize = CGSize()
         
         if DeviceType.IS_IPHONE_5 {
@@ -97,11 +97,11 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         return itemSize
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsZero
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets.zero
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         // 6p的像素密度较大，因此分割线间隔调高为1
         if DeviceType.IS_IPHONE_6P {
             return CGFloat(1)
@@ -110,7 +110,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
             return CGFloat(0.5)
         }
     }
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         if DeviceType.IS_IPHONE_6P {
             return CGFloat(1)
         }
