@@ -11,7 +11,7 @@ import UIKit
 let reuseIdentifier = "CollectionCell"
 
 let cars = ["丰田", "雷克萨斯", "本田", "奥迪", "奔驰", "宝马", "英菲尼迪", "丰田", "雷克萨斯", "本田", "奥迪", "奔驰", "宝马", "英菲尼迪"]
-let colors = [UIColor.purple, UIColor.red, UIColor.blue, UIColor.orange]
+let colors = [UIColor.purple, UIColor.red, UIColor.blue, UIColor.orange, UIColor.green]
 
 class ViewController: UIViewController {
     // 定义SB中的collectionView
@@ -61,7 +61,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate, 
         print(cell.frame.width)
         //println(self.collectionView.frame.width)
         // Configure the cell
-        cell.backgroundColor = colors[indexPath.item % 4]
+        cell.backgroundColor = colors[indexPath.item % 5]
         
         return cell
     }
